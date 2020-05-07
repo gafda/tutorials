@@ -237,37 +237,19 @@ $ sudo snap install microk8s --classic
 $ sudo usermod -aG microk8s ubuntu
 ```
 
-5. Now let's check if everything is ok...
-
-```shell
-$ sudo microk8s.status
-microk8s is running
-addons:
-dashboard: disabled
-dns: disabled
-helm: disabled
-helm3: disabled
-host-access: disabled
-ingress: disabled
-metallb: disabled
-metrics-server: disabled
-rbac: disabled
-registry: disabled
-storage: disabled
-
-$ sudo microk8s.kubectl cluster-info
-Kubernetes master is running at https://127.0.0.1:16443
-
-To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-
-$ microk8s.kubectl get node
-NAME    STATUS     ROLES    AGE     VERSION
-rpi01   Ready      <none>   4m12s   v1.18.2-41+4706dd1a7d2b25
-```
-
-6. Add some usefull alias:
+5. Add some usefull alias:
 
 ```shell
 ie.:
 $ echo "alias kubectl='microk8s.kubectl'" >> ~/.bash_aliases
+$ source ~/.bash_aliases
+```
+
+6. Now let's check if everything is ok...
+
+```shell
+$ sudo microk8s.status
+$ kubectl cluster-info
+$ kubectl get no
+$ kubectl describe node rpi01
 ```
