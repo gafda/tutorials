@@ -263,7 +263,7 @@ sudo reboot
 7. Now let's check if everything is ok...
 
 ```shell
-sudo microk8s.status
+microk8s.status
 kubectl cluster-info
 kubectl get no
 kubectl describe node rpi01
