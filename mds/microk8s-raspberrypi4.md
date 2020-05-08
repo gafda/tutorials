@@ -149,6 +149,12 @@ cgroup_enable=memory cgroup_memory=1
 $ sudo reboot
 ```
 
+9. **Optional** You can check (after reboot) with the command on the Node:
+
+```shell
+$ cat /proc/cgroups
+```
+
 ---
 
 ## Passwordless RPi4B Login
