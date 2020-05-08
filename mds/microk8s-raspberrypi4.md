@@ -24,36 +24,7 @@ dc:a6:32:00:00:04|192.168.101.104|rpi04|`$ ssh ubuntu@192.168.101.104`
 
 > ie.: `Ubuntu 20.04 LTS (Pi3/Pi4) 64bit`
 
-3. Navigate to it's 'boot' partition at:
-
-> `/boot/firmware`
-
-4. Edit the file `nobtcmd.txt`, but if this file does not exist then use `cmdline.txt`:
-
-```shell
-$ sudo vi nobtcmd.txt
-```
-
-**or**
-
-```shell
-$ sudo vi cmdline.txt
-```
-
-**file content sample**
-```ini
-net.ifnames=0 dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=LABEL=writable rootfstype=ext4 elevator=deadline rootwait fixrtc
-```
-
-...depending on what file already exists.
-
-5. There should be a single line of commands... at the ***very begining*** of that line add:
-
-> ... `cgroup_enable=memory cgroup_memory=1`
-
-6. Save the file and exit the editor
-
-7. Safelly, unmount the card and place it in the RPi4B
+3. Safelly, unmount the card and place it in the RPi4B
 
 ---
 
@@ -144,6 +115,37 @@ $ chmod +x update.sh
 $ echo "alias update='~/update.sh'" >> ~/.bash_aliases
 $ source ~/.bashrc
 $ update
+```
+
+4. Navigate to the following directory:
+
+```shell
+$ cd /boot/firmware
+```
+
+5. Edit the file `nobtcmd.txt` or `cmdline.txt` depending on your Ubuntu image version:
+
+```shell
+$ sudo vim cmdline.txt
+```
+
+**You should see something like this:**
+```ini
+net.ifnames=0 dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=LABEL=writable rootfstype=ext4 elevator=deadline rootwait fixrtc
+```
+
+6. There should be a single line of commands so at the ***very begining*** of that line add:
+
+```ini
+cgroup_enable=memory cgroup_memory=1 
+```
+
+7. Save the file and exit the editor
+
+8. Reboot node
+
+```shell
+$ sudo reboot
 ```
 
 ---
