@@ -246,7 +246,6 @@ $ sudo chown -f -R ubuntu ~/.kube
 ```shell
 ie.:
 $ echo "alias kubectl='microk8s.kubectl'" >> ~/.bash_aliases
-$ source ~/.bash_aliases
 ```
 
 6. Reboot before using...
