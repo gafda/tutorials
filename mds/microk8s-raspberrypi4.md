@@ -14,7 +14,7 @@ dc:a6:32:00:00:04|192.168.101.104|rpi04|`$ ssh ubuntu@192.168.101.104`
 
 ## Card preparation per RPi4B Node
 
-### This section contains the process that must be done per card\node using linux in your preparation machine
+#### This section contains the process that must be done per card\node using linux in your preparation machine
 
 1. Install **Raspberry Pi Imager**
 
@@ -42,12 +42,12 @@ $ sudo vi cmdline.txt
 
 **file content sample**
 ```ini
-net.ifnames=0 dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=LABEL=writable rootfstype=ext4 elevator=deadline rootwait fixrtc cgroup_enable=memory cgroup_memory=1
+net.ifnames=0 dwc_otg.lpm_enable=0 console=ttyAMA0,115200 console=tty1 root=LABEL=writable rootfstype=ext4 elevator=deadline rootwait fixrtc
 ```
 
 ...depending on what file already exists.
 
-5. There should be a single line of commands... at the end of that line add:
+5. There should be a single line of commands... at the ***very begining*** of that line add:
 
 > ... `cgroup_enable=memory cgroup_memory=1`
 
