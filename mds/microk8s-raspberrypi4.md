@@ -234,7 +234,8 @@ $ sudo snap install microk8s --classic
 4. Let's make the user run Microk8s without `sudo` command:
 
 ```shell
-$ sudo usermod -aG microk8s ubuntu
+$ sudo usermod -a -G microk8s ubuntu
+$ sudo chown -f -R ubuntu ~/.kube
 ```
 
 5. Add some usefull alias:
@@ -245,7 +246,13 @@ $ echo "alias kubectl='microk8s.kubectl'" >> ~/.bash_aliases
 $ source ~/.bash_aliases
 ```
 
-6. Now let's check if everything is ok...
+6. Reboot before using...
+
+```shell
+$ sudo reboot
+```
+
+7. Now let's check if everything is ok...
 
 ```shell
 $ sudo microk8s.status
