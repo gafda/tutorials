@@ -53,7 +53,7 @@ ie.
 3. Type:
 
 ```shell
-$ ssh ubuntu@192.168.101.101
+ssh ubuntu@192.168.101.101
 ```
 
 4. A message will return:
@@ -97,7 +97,7 @@ Retype new password: >>reenter-the-new-password<<
 1. Connect to the RPi4B via ssh with:
 
 ```shell
-$ ssh ubuntu@192.168.101.101
+ssh ubuntu@192.168.101.101
 ```
 
 2. Login with your new password
@@ -111,23 +111,23 @@ ubuntu@ubuntu:~$
 4) Type the following commands:
 
 ```shell
-$ echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove" > update.sh
-$ chmod +x update.sh
-$ echo "alias update='~/update.sh'" >> ~/.bash_aliases
-$ source ~/.bashrc
-$ update
+echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove" > update.sh
+chmod +x update.sh
+echo "alias update='~/update.sh'" >> ~/.bash_aliases
+source ~/.bashrc
+update
 ```
 
 4. Navigate to the following directory:
 
 ```shell
-$ cd /boot/firmware
+cd /boot/firmware
 ```
 
 5. Edit the file `nobtcmd.txt` or `cmdline.txt` depending on your Ubuntu image version:
 
 ```shell
-$ sudo vim cmdline.txt
+sudo vim cmdline.txt
 ```
 
 **You should see something like this:**
@@ -146,13 +146,13 @@ cgroup_enable=memory cgroup_memory=1
 8. Reboot node
 
 ```shell
-$ sudo reboot
+sudo reboot
 ```
 
 9. **Optional** You can check (after reboot) with the command on the Node:
 
 ```shell
-$ cat /proc/cgroups
+cat /proc/cgroups
 ```
 
 ---
@@ -164,8 +164,8 @@ $ cat /proc/cgroups
 1. Generate a new RSA key especific for your RPi4B's
 
 ```shell
-$ mkdir ~/.ssh/rpi
-$ ssh-keygen -f ~/.ssh/rpi/rpi4-key -t rsa -b 4096
+mkdir ~/.ssh/rpi
+ssh-keygen -f ~/.ssh/rpi/rpi4-key -t rsa -b 4096
 ```
 
 2. On:
@@ -178,13 +178,13 @@ Enter passphrase (empty for no passphrase):
 4. Now make it available on your client machine with:
 
 ```shell
-$ echo "IdentityFile ~/.ssh/rpi/rpi4-key" >> ~/.ssh/config
+echo "IdentityFile ~/.ssh/rpi/rpi4-key" >> ~/.ssh/config
 ```
 
 5. It's time to copy the public key to the RPi4B Node with:
 
 ```shell
-$ ssh-copy-id -i ~/.ssh/rpi/rpi4-key.pub ubuntu@192.168.101.101
+ssh-copy-id -i ~/.ssh/rpi/rpi4-key.pub ubuntu@192.168.101.101
 ```
 
 6. From now on, connecting via SSH shouldn't require password if connected through your client machine.
@@ -198,20 +198,20 @@ $ ssh-copy-id -i ~/.ssh/rpi/rpi4-key.pub ubuntu@192.168.101.101
 1. **[Optional]** You can locally configure a static IP for the RPi4B Node you're working with using the command:
 
 ```shell
-$ sudo ifconfig eth0 192.168.101.101 netmask 255.255.255.0
+sudo ifconfig eth0 192.168.101.101 netmask 255.255.255.0
 ```
 
 2. Giving a good hostname makes things easier, so to set the hostname use the command:
 
 ```shell
-$ sudo hostnamectl set-hostname rpi01
+sudo hostnamectl set-hostname rpi01
 ```
 
 3. Run an update command and reboot the RPi4B to make sure everything is set and ready:
 
 ```shell
-$ update
-$ sudo reboot
+update
+sudo reboot
 ```
 
 ---
@@ -225,46 +225,46 @@ $ sudo reboot
 1. You should be able to connect to the pre-configured cluster node by it's hostname instead of the IP address:
 
 ```shell
-$ ssh ubuntu@rpi01
+ssh ubuntu@rpi01
 ```
 
 2. Make sure everything it up-to-date:
 
 ```shell
-$ update
+update
 ```
 
 3. Install the Microk8s the easy way via Snap:
 
 ```shell
-$ sudo snap install microk8s --classic --channel=latest/stable
+sudo snap install microk8s --classic --channel=latest/stable
 ```
 
 4. Let's make the user run Microk8s without `sudo` command:
 
 ```shell
-$ sudo usermod -a -G microk8s ubuntu
-$ sudo chown -f -R ubuntu ~/.kube
+sudo usermod -a -G microk8s ubuntu
+sudo chown -f -R ubuntu ~/.kube
 ```
 
 5. Add some usefull alias:
 
 ```shell
 ie.:
-$ echo "alias kubectl='microk8s.kubectl'" >> ~/.bash_aliases
+echo "alias kubectl='microk8s.kubectl'" >> ~/.bash_aliases
 ```
 
 6. Reboot before using...
 
 ```shell
-$ sudo reboot
+sudo reboot
 ```
 
 7. Now let's check if everything is ok...
 
 ```shell
-$ sudo microk8s.status
-$ kubectl cluster-info
-$ kubectl get no
-$ kubectl describe node rpi01
+sudo microk8s.status
+kubectl cluster-info
+kubectl get no
+kubectl describe node rpi01
 ```
