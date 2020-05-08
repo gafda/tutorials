@@ -231,7 +231,7 @@ $ update
 3. Install the Microk8s the easy way via Snap:
 
 ```shell
-$ sudo snap install microk8s --classic
+$ sudo snap install microk8s --classic --channel=latest/stable
 ```
 
 4. Let's make the user run Microk8s without `sudo` command:
