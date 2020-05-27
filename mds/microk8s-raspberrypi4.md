@@ -111,7 +111,7 @@ ubuntu@ubuntu:~$
 4) Type the following commands:
 
 ```shell
-echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove" > update.sh
+$ echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove && sudo apt-get clean && sudo apt-get --purge autoremove -y" > update.sh
 chmod +x update.sh
 echo "alias update='~/update.sh'" >> ~/.bash_aliases
 source ~/.bashrc
@@ -237,7 +237,7 @@ update
 3. Install the Microk8s the easy way via Snap:
 
 ```shell
-sudo snap install microk8s --classic --channel=latest/stable
+sudo snap install microk8s --classic
 ```
 
 4. Let's make the user run Microk8s without `sudo` command:
@@ -267,4 +267,40 @@ microk8s.status
 kubectl cluster-info
 kubectl get no
 kubectl describe node rpi01
+```
+8. Add slave nodes to master node
+
+* For each slave node:
+```shell
+master@rpi01$ microk8s add-node
+Join node with: microk8s join 192.168.101.101:25000/< redacted >
+
+If the node you are adding is not reachable through the default interface you can use one of the following:
+ microk8s join 192.168.101.101:25000/< redacted >
+ microk8s.join 10.1.23.0:25000/< redacted >
+```
+```shell
+slave@rpi02$ microk8s join 192.168.101.101:25000/< redacted >
+```
+This could take some time.
+
+9. Check if node was added
+
+```shell
+master@rpi01$ microk8s kubectl get node
+NAME    STATUS     ROLES    AGE   VERSION
+rpi01   Ready      <none>   18d   v1.18.2
+rpi02   Ready      <none>   18d   v1.18.2
+```
+
+10. And after all Nodes were added
+
+```shell
+master@rpi01$ microk8s kubectl get node
+NAME    STATUS     ROLES    AGE   VERSION
+rpi01   Ready      <none>   18d   v1.18.2
+rpi02   Ready      <none>   18d   v1.18.2
+rpi03   Ready      <none>   18d   v1.18.2
+rpi04   Ready      <none>   18d   v1.18.2
+...
 ```
