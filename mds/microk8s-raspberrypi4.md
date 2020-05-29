@@ -147,10 +147,10 @@ cgroup_enable=memory cgroup_memory=1
 
 ```shell
 sudo echo "
-192.168.101.101 rpi01.rlan rpi01
-192.168.101.102 rpi02.rlan rpi02
-192.168.101.103 rpi03.rlan rpi03
-192.168.101.104 rpi04.rlan rpi04
+192.168.101.101 rpi01
+192.168.101.102 rpi02
+192.168.101.103 rpi03
+192.168.101.104 rpi04
 " >> /etc/hosts
 ```
 
