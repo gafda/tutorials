@@ -146,12 +146,16 @@ cgroup_enable=memory cgroup_memory=1
 8. **Optional** Add all Rpi Nodes to the 'hosts'
 
 ```shell
-sudo echo "
+sudo vim /etc/hosts
+```
+
+Then add the following and save:
+
+```shell
 192.168.101.101 rpi01
 192.168.101.102 rpi02
 192.168.101.103 rpi03
 192.168.101.104 rpi04
-" >> /etc/hosts
 ```
 
 9. Reboot node
