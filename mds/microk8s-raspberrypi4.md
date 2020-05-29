@@ -111,7 +111,7 @@ ubuntu@ubuntu:~$
 4) Type the following commands:
 
 ```shell
-$ echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove && sudo apt-get clean && sudo apt-get --purge autoremove -y" > update.sh
+echo "clear && sudo apt update && sudo apt-get upgrade -y && sudo apt autoremove && sudo apt-get clean && sudo apt-get --purge autoremove -y && snap refresh --list && sudo snap refresh" > update.sh
 chmod +x update.sh
 echo "alias update='~/update.sh'" >> ~/.bash_aliases
 source ~/.bashrc
