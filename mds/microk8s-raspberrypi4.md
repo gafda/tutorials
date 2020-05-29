@@ -143,13 +143,24 @@ cgroup_enable=memory cgroup_memory=1
 
 7. Save the file and exit the editor
 
-8. Reboot node
+8. **Optional** Add all Rpi Nodes to the 'hosts'
+
+```shell
+sudo echo "
+192.168.101.101 rpi01.rlan rpi01
+192.168.101.102 rpi02.rlan rpi02
+192.168.101.103 rpi03.rlan rpi03
+192.168.101.104 rpi04.rlan rpi04
+" >> /etc/hosts
+```
+
+9. Reboot node
 
 ```shell
 sudo reboot
 ```
 
-9. **Optional** You can check (after reboot) with the command on the Node:
+10. **Optional** You can check (after reboot) with the command on the Node:
 
 ```shell
 cat /proc/cgroups
